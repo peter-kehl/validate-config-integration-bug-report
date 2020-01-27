@@ -1,0 +1,47 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+plugins {
+    id 'java'
+    id 'application'
+    id "org.springframework.boot" version "2.2.2.RELEASE" apply false
+    id "io.spring.dependency-management" version "1.0.8.RELEASE" apply false
+}
+
+repositories {
+    maven {
+        url 'https://maven.springframework.org/release'
+    }
+    mavenLocal()
+    jcenter()
+    maven {
+        url 'http://repo.maven.apache.org/maven2'
+    }
+    maven {
+        url 'https://mvnrepository.com'
+    }
+}
+application {
+    mainClassName = "your.pack.App"
+}
+
+dependencies {
+    // We need either this artifact, or the following artifact (or both).
+    // With the first one (AND optionally with the following artifact together, too):
+    // Configuration fields are null (they don't reflect the values in the config file) - BAD.
+    // (That's same for Java or Kotlin.)
+    // (That's regardless of whether the config file is .yaml, or .properties.)
+    // (Also, configuration bean object is of class class your.pack.Conf$$EnhancerBySpringCGLIB$$25f5fabe.)
+    compile("org.springframework.boot:spring-boot-starter-validation:2.2.2.RELEASE")
+    //
+    // With the following one (BUT without the previous one):
+    // Config. bean's fields are populated from application.properties - GOOD.
+    // (And the configuration bean object is not a proxy, but of your own class).
+    //
+    // (Side note: when using application.yaml config (instead of application.properties),
+    // we get: Attempted to load applicationConfig: [classpath:/application.yaml] but snakeyaml was not found on the classpath.)
+    //compile("org.springframework.boot:spring-boot-autoconfigure:2.2.2.RELEASE")
+
+    implementation "org.springframework.boot:spring-boot-starter-integration"
+    implementation "org.springframework.integration:spring-integration-core:5.2.2.RELEASE"
+    implementation "org.springframework.integration:spring-integration-mqtt:5.2.2.RELEASE"
+}

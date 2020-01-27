@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: "validate-config-integration"
+  main:
+    web-application-type: NONE
+  cloud:
+    discovery:
+      enabled: false
+    config:
+      enabled: false
