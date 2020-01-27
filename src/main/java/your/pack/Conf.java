@@ -8,11 +8,7 @@ import org.springframework.validation.annotation.Validated;
 @ConfigurationProperties(prefix = "validateconfig")
 @Validated
 public class Conf {
-    String value;
+    private String value;
     public /*@NotEmpty*/ String getValue() { return value; }
     public /*@NotEmpty*/ void setValue(String given) { value = given; }
-
-    public String another;
-    public /*@NotEmpty*/ String getAnother() { return another; }
-    public /*@NotEmpty*/ void setAnother(String given) { another = given; }
 }
